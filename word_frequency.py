@@ -7,4 +7,4 @@ words=[w.strip(".,!?;:\"'()")for w in words]
 words=[w for w in words if w]
 counter=Counter(words)
 for word,count in counter.most_common(10):
-    print(f"{word:15s}{count}")
+    print(f"{word:<15}{count:>5}")
