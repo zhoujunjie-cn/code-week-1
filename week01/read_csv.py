@@ -1,12 +1,19 @@
 # 导入python内置的csv模块，用于读取和写入csv格式文件
 import csv
+# 导入pathlib里的Path，用来定位“这个脚本自己所在的文件夹”
+from pathlib import Path
+
+# BASE = 当前脚本所在目录（week01）。用 BASE 拼出来的路径，不受“从哪里运行”影响：
+# 在 PyCharm 里点运行、在终端里敲 python、以后上服务器，都能找到同一个文件。
+BASE = Path(__file__).parent
+
 # 创建一个空列表，用来准备存储后续从文件读取出来的所有数据行
 rows = []
 # 用try包裹读取文件的代码块，用于捕获文件不存在时的异常
 try:
     # with语句安全打开sample.csv，指定只读模式"r"，并处理文件编码
     # encoding="utf-8-sig"专门用于处理可能带有BOM头的UTF-8文件（常用于Excel导出的csv）
-    with open("sample.csv", "r", encoding="utf-8-sig") as f:
+    with open(BASE / "sample.csv", "r", encoding="utf-8-sig") as f:
         # 使用csv.DictReader将打开的文件转换成字典格式读取器
         # 这样读取出来的每一行都会是一个字典，键是表头（如word，count）
         reader = csv.DictReader(f)
@@ -52,7 +59,7 @@ print(f"共{len(rows)}条,总和{total_count}")
 # 新增写入result.csv的代码块
 # 打开或创建result.csv文件，"w"表示写入模式
 # newline=""是必不可少的参数，防止Windows下写入时每行之间多出空行
-with open("result.csv","w",encoding="utf_8_sig",newline="")as f_out:
+with open(BASE / "result.csv", "w", encoding="utf_8_sig", newline="") as f_out:
     # 创建一个csv.writer对象，用于将数据写入文件
     writer=csv.writer(f_out)
     # 写入表头：这里是一个列表，里面包含"word"和"count"

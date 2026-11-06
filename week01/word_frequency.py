@@ -1,9 +1,15 @@
 # 统计一段英文里出现频率最高的单词
 # 导入collections模块中的Counter类，专门用做数据统计
 from collections import Counter
+# 导入pathlib里的Path，用来定位“这个脚本自己所在的文件夹”
+from pathlib import Path
+
+# BASE = 当前脚本所在目录（week01）。用它拼路径，不受“从哪里运行”影响。
+BASE = Path(__file__).parent
+
 # 使用with语句安全打开文件"sample.txt"（只读模式，并制定UTF-8编码）
 # with语句：代码执行完毕后会自动关闭文件，不用手动写f.close()
-with open("sample.txt","r",encoding="utf-8") as f:
+with open(BASE / "sample.txt", "r", encoding="utf-8") as f:
     #读取文件所有内容，并将其作为一个字符串赋值给变量text
     text=f.read()
 # text.lower()将文本中所有大小写字母转换成小写
